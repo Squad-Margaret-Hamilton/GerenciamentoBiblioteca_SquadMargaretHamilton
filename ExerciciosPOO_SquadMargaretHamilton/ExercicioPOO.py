@@ -41,7 +41,7 @@ def renovar(self):
         else:
             return False
 
-    def devolver(self):
+def devolver(self):
         if not self.disponivel:
             self.disponivel = True
             return True
