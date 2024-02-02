@@ -34,7 +34,7 @@ class Exemplar:
         if self.disponivel:
             self.disponivel = False
             self.data_emprestimo = datetime.now()
-            self.data_devolucao = self.data_emprestimo + timedelta(days=7)  # digamos que o emprestimo seja de 7 dias, não sei se precisa dessa informação
+            self.data_devolucao = self.data_emprestimo + timedelta(days=7)
             return True
         else:
             return False
@@ -42,7 +42,7 @@ class Exemplar:
     def renovar(self):
             if self.renovacoes_restantes > 0:
                 self.renovacoes_restantes -= 1
-                self.data_devolucao += timedelta(days=7)  # simulando que pode renovar por mais 7 dias, não sei se precisa dessa informação
+                self.data_devolucao += timedelta(days=7)
                 return True
             else:
                 return False
@@ -71,7 +71,7 @@ class Biblioteca:
         self.usuarios = []
         self.livros = []
         self.exemplares = []
-        self.emprestimos = [] # penso que aqui precisa acrescentar dentro dessa classe o cadastro de livro, emprestimo a renovação e devolução... 
+        self.emprestimos = [] 
 
     def cadastrar_livro (self, livro):
         self.livros.append(livro)
@@ -95,7 +95,7 @@ class Biblioteca:
     def devolucao(self, emprestimo):
         emprestimo.devolver()
 
-autor1 = Autor("John Green", "Americano", "123456789", ["Obra1", "Obra2"])
+autor1 = Autor("autor1", "Americano", "123456789", ["Obra1", "Obra2"])
 livro1 = Livro("Meu coração e outros buracos negros", "Editora1", ["Ação", "Aventura"], renovacoes=2)
 livro1.adicionar_autor(autor1)
 
