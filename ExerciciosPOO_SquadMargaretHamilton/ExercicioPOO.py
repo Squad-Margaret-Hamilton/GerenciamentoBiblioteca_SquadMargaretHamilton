@@ -47,6 +47,7 @@ class Exemplar:
             else:
                 return False
 
+
     def devolver(self):
             if not self.disponivel:
                 self.disponivel = True
