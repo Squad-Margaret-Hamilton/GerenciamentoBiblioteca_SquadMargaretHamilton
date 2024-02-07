@@ -4,13 +4,13 @@ conexao = sqlite3.connect('biblioteca.db')
 cursor = conexao.cursor()
 
 #criacao da tbl
-#cursor.execute('CREATE TABLE usuario(id_usuario INT PRIMARY KEY, nome VARCHAR (100),telefone INT, endereco VARCHAR (100),nacionalidade VARCHAR (100), email VARCHAR(100));')
-#cursor.execute('CREATE TABLE livro(id_livro INT PRIMARY KEY, titulo VARCHAR (100), editora VARCHAR (100), autor VARCHAR(100), genero VARCHAR(100));')
-#cursor.execute('CREATE TABLE biblioteca(id_usuario INT, id_livro INT, nome VARCHAR (100),telefone INT, nacionalidade VARCHAR (100), FOREIGN KEY (id_livro) REFERENCES livro(id_livro),FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario));')
-#cursor.execute('CREATE TABLE exemplares(id_usuario INT, id_livro INT, data_emprestimo DATE, data_devolucao DATE, limite_renovacao INT, estado_exemplar VARCHAR(100),FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario), FOREIGN KEY(id_livro) REFERENCES livro(id_livro));')
+# cursor.execute('CREATE TABLE usuario(id_usuario INT PRIMARY KEY, nome VARCHAR (100),telefone INT, endereco VARCHAR (100),nacionalidade VARCHAR (100), email VARCHAR(100));')
+# cursor.execute('CREATE TABLE livro(id_livro INT PRIMARY KEY, titulo VARCHAR (100), editora VARCHAR (100), autor VARCHAR(100), genero VARCHAR(100));')
+# cursor.execute('CREATE TABLE biblioteca(id_usuario INT, id_livro INT, nome VARCHAR (100),telefone INT, nacionalidade VARCHAR (100), FOREIGN KEY (id_livro) REFERENCES livro(id_livro),FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario));')
+# cursor.execute('CREATE TABLE exemplares(id_usuario INT, id_livro INT, data_emprestimo DATE, data_devolucao DATE, limite_renovacao INT, estado_exemplar VARCHAR(100),FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario), FOREIGN KEY(id_livro) REFERENCES livro(id_livro));')
 
 
-# # #Inserção de Dados na tabela usuario:
+# #Inserção de Dados na tabela usuario:
 # cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (1,"Marcella Amazonas", "81999999999", "Avenida Boa Viagem, 545, ap 120, Boa viagem, Recife, Pernambuco", "brasileira", "marcella@gmail.com" )')
 # cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (2,"Priscila Nakayama", "11999999999", "Avenida São Paulo, 234, ap 1200, Mogi das Cruzes, São Paulo", "brasileira", "priscila@gmail.com" )')
 # cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (3,"Pedro Silva", "84999999999", "Rua Professor Luiz, 767, Jaboatão, Recife, Pernambuco", "brasileiro", "pedro@gmail.com" )')
@@ -59,7 +59,36 @@ cursor = conexao.cursor()
 # cursor.execute('INSERT INTO exemplares(id_usuario, id_livro, data_emprestimo, data_devolucao, limite_renovacao, estado_exemplar) VALUES (9, 9, "2024-02-06", "2024-03-06", 3, "Emprestado")')
 # cursor.execute('INSERT INTO exemplares(id_usuario, id_livro, data_emprestimo, data_devolucao, limite_renovacao, estado_exemplar) VALUES (10, 10, "2024-02-06", "2024-03-06", 3, "Emprestado")')
 
-      
+
+#4. Atualizações e Exclusões:
+#- Escreva consultas SQL para atualizar e excluir registros do banco de
+#dados, por exemplo, para marcar um livro como devolvido ou remover
+#um autor.
+
+#Alteracoes na tabela biblioteca
+# cursor.execute('UPDATE biblioteca SET nacionalidade="uruguaio" WHERE id_usuario=6')
+# cursor.execute('UPDATE biblioteca SET telefone=87964999990 WHERE nome="Giovana Lacerda"')
+
+# #Alteracoes na tabela exemplares
+# cursor.execute('UPDATE exemplares SET estado_exemplar="Devolvido" WHERE id_livro=1')
+# cursor.execute('UPDATE exemplares SET data_devolucao="2024-04-05" WHERE id_usuario=2')
+# cursor.execute('UPDATE exemplares SET estado_exemplar="Atrasado" WHERE data_devolucao > "2024-04-06"')
+
+# cursor.execute('UPDATE exemplares SET data_devolucao="2024-03-06" WHERE id_usuario=3')
+# cursor.execute('UPDATE exemplares SET estado_exemplar="Devolvido" WHERE data_devolucao > "2024-03-06"')
+
+# #Alteracoes na tabela livro
+
+# cursor.execute('UPDATE livro SET genero="Romance/Ficção" WHERE genero="Romance"')
+# cursor.execute('UPDATE livro SET autor="Isabela Castro" WHERE autor="Isabela Castr"')
+
+# #Alteracoes na tabela usuario
+# cursor.execute('DELETE FROM usuario WHERE id_usuario=9')
+# cursor.execute('UPDATE usuario SET nome="Pedro Silva dos Santos" WHERE nome="Pedro Silva"')
+
+
+
+
       
 conexao.commit()
 conexao.close
