@@ -5,7 +5,7 @@
 ### o grupo 02 responsavel pelo exercicio de BD - Andreia, Priscila, Marcella, Laryssa e Naiane
 #### Priscila criou as tabelas
 #### Marcela 
-#### Andreia
+#### Andreia fez as queries de update e delte (tópico 4)
 #### Laryssa
 #### Apenas XXXXXX contribuiram. 
 
