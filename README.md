@@ -4,10 +4,10 @@
 
 ### o grupo 02 responsavel pelo exercicio de BD - Andreia, Priscila, Marcella, Laryssa e Naiane
 #### Priscila criou as tabelas
-#### Marcela 
+#### Marcella fez a inserção dos dados nas tabelas 
 #### Andreia
 #### Laryssa
-#### Apenas XXXXXX contribuiram. 
+ 
 
 ## Nao necessariamente todas estao participando, ate o final do projeto iremos verificar quem contribuiu ou nao 
 
