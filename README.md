@@ -1,13 +1,11 @@
 ### a squad através de sorteio foi subdividida em 2 grupos
 ### o grupo 01 responsavel pelo exercicio de POO - Mileine, Larissa A, Manoela, Sara e Ana
-#### Apenas a Mileine do grupo01 fez e a Laryssa e a Priscila do grupo02 contribuiram.
+### Porem apenas a Mileine do grupo01 fez
+#### A Laryssa e a Priscila do grupo02 contribuiram nesse exercicio
 
 ### o grupo 02 responsavel pelo exercicio de BD - Andreia, Priscila, Marcella, Laryssa e Naiane
 #### Priscila criou as tabelas
 #### Marcella fez a inserção dos dados nas tabelas 
-#### Andreia
-#### Laryssa
- 
+#### Laryssa  e Andreia fizeram as alteracoes e as exclusoes 
 
-## Nao necessariamente todas estao participando, ate o final do projeto iremos verificar quem contribuiu ou nao 
-
+## Foram essas as participantes da Squad Margaret Hamilton 

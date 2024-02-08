@@ -59,7 +59,27 @@ cursor = conexao.cursor()
 # cursor.execute('INSERT INTO exemplares(id_usuario, id_livro, data_emprestimo, data_devolucao, limite_renovacao, estado_exemplar) VALUES (9, 9, "2024-02-06", "2024-03-06", 3, "Emprestado")')
 # cursor.execute('INSERT INTO exemplares(id_usuario, id_livro, data_emprestimo, data_devolucao, limite_renovacao, estado_exemplar) VALUES (10, 10, "2024-02-06", "2024-03-06", 3, "Emprestado")')
 
-      
-      
+
+#Alteracoes na tabela biblioteca
+# cursor.execute('UPDATE biblioteca SET nacionalidade="uruguaio" WHERE id_usuario=6')
+# cursor.execute('UPDATE biblioteca SET telefone=87964999990 WHERE nome="Giovana Lacerda"')
+
+# #Alteracoes na tabela exemplares
+# cursor.execute('UPDATE exemplares SET estado_exemplar="Devolvido" WHERE id_livro=1')
+# cursor.execute('UPDATE exemplares SET data_devolucao="2024-04-05" WHERE id_usuario=2')
+# cursor.execute('UPDATE exemplares SET estado_exemplar="Atrasado" WHERE data_devolucao > "2024-04-06"')
+
+# cursor.execute('UPDATE exemplares SET data_devolucao="2024-03-06" WHERE id_usuario=3')
+# cursor.execute('UPDATE exemplares SET estado_exemplar="Devolvido" WHERE data_devolucao > "2024-03-06"')
+
+# #Alteracoes na tabela livro
+
+# cursor.execute('UPDATE livro SET genero="Romance/Ficção" WHERE genero="Romance"')
+# cursor.execute('UPDATE livro SET autor="Isabela Castro" WHERE autor="Isabela Castr"')
+
+# #Alteracoes na tabela usuario
+# cursor.execute('DELETE FROM usuario WHERE id_usuario=9')
+# cursor.execute('UPDATE usuario SET nome="Pedro Silva dos Santos" WHERE nome="Pedro Silva"')
+
 conexao.commit()
 conexao.close
