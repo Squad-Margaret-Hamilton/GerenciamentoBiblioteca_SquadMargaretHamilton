@@ -4,24 +4,85 @@ conexao = sqlite3.connect('biblioteca.db')
 cursor = conexao.cursor()
 
 #criacao da tbl
-#cursor.execute('CREATE TABLE usuario(id_usuario INT PRIMARY KEY, nome VARCHAR (100),telefone INT, endereco VARCHAR (100),nacionalidade VARCHAR (100), email VARCHAR(100));')
-#cursor.execute('CREATE TABLE livro(id_livro INT PRIMARY KEY, titulo VARCHAR (100), editora VARCHAR (100), autor VARCHAR(100), genero VARCHAR(100));')
-#cursor.execute('CREATE TABLE biblioteca(id_usuario INT, id_livro INT, nome VARCHAR (100),telefone INT, nacionalidade VARCHAR (100), FOREIGN KEY (id_livro) REFERENCES livro(id_livro),FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario));')
-#cursor.execute('CREATE TABLE exemplares(id_usuario INT, id_livro INT, data_emprestimo DATE, data_devolucao DATE, limite_renovacao INT, estado_exemplar VARCHAR(100),FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario), FOREIGN KEY(id_livro) REFERENCES livro(id_livro));')
+cursor.execute('''
+        CREATE TABLE IF NOT EXIST biblioteca (
+            id_biblioteca INT PRIMARY KEY, nome VARCHAR (100) NOT NULL,
+            telefone INT, nacionalidade VARCHAR (100);')
+            ''')
+
+cursor.execute('''
+        CREATE TABLE IF NOT EXIST usuarios (
+            id_usuario INT PRIMARY KEY, 
+            nome VARCHAR (100),telefone INT, 
+            endereco VARCHAR (100),nacionalidade VARCHAR (100), 
+            email VARCHAR(100), id_biblioteca, FOREIGN KEY(id_biblioteca)
+            REFERENCES biblioteca(id_biblioteca);')
+               ''')
+
+cursor.execute('''
+        CREATE TABLE IF NOT EXIST livros (
+            id_livro INT PRIMARY KEY, titulo VARCHAR (100) NOT NULL, 
+            editora VARCHAR (100), autor VARCHAR(100), 
+            genero VARCHAR(100), id_usuario,id_biblioteca,
+            FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario),
+            FOREIGN KEY(id_biblioteca) REFERENCES biblioteca(id_biblioteca);')
+            ''')
+
+cursor.execute('''
+        CREATE TABLE IF NOT EXIST autores (
+            id_autor INT PRIMARY KEY, 
+            nome VARCHAR (100),telefone INT,
+            genero VARCHAR(100),titulo VARCHAR (100)
+            id_biblioteca, FOREIGN KEY(id_biblioteca)
+            REFERENCES biblioteca(id_biblioteca)
+            ''')
+
+cursor.execute ( '''  
+        CREATE TABLE IF NOT EXIST exemplares (
+            id_exemplares, data_emprestimo DATE, 
+            data_devolucao DATE, limite_renovacao INT,
+            estado_exemplar VARCHAR(100),
+            id_usuario, id_livro, id_biblioteca,
+            FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario),
+            FOREIGN KEY(id_livro) REFERENCES livro(id_livro)
+            FOREIGN KEY(id_biblioteca) REFERENCES biblioteca(id_biblioteca);')
+            ''')
 
 
 # # #Inserção de Dados na tabela usuario:
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (1,"Marcella Amazonas", "81999999999", "Avenida Boa Viagem, 545, ap 120, Boa viagem, Recife, Pernambuco", "brasileira", "marcella@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (2,"Priscila Nakayama", "11999999999", "Avenida São Paulo, 234, ap 1200, Mogi das Cruzes, São Paulo", "brasileira", "priscila@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (3,"Pedro Silva", "84999999999", "Rua Professor Luiz, 767, Jaboatão, Recife, Pernambuco", "brasileiro", "pedro@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (4,"Livia Maria", "91999999999", "Rua D, 567, Minas Gerais", "brasileira", "livia@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (5,"Ana Oliveira", "21999999999", "Rua das Graças, 301, Recife, Pernambuco", "brasileira", "ana@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (6,"Pedro Costa", "22999999999", "Travessa F, 123, Salvador, Bahia", "brasileiro", "pedro@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (7,"Laura Fernandes", "33999999999", "Rua das Flores, 5678, Florianópolis, Santa Catarina", "brasileira", "laura@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (8,"Victor Correia", "54999999999", "Rua Guiliano Professor, 9087, ap 2300, João Pessoa,Paraiba", "brasileiro", "victor@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (9,"Eliane Santos", "89999999999", "Avenida dos Ventos, 456, Vista Bela, Piauí", "brasileira", "eliane@gmail.com" )')
-# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES (10,"Giovana Lacerda", "75999999999", "Rua das Borboletas, 123, Jardim Primavera, Alagoas", "brasileira", "giovana@gmail.com" )')
 
+cursor.execute('''
+        INSERT INTO biblioteca (id_biblioteca, nome, telefone ,nacionalidade) VALUES 
+            (1000 "Marcella Amazonas", 81999999999, "brasileira"),
+            (1001, "Priscila Nakayama", 11999999999, "brasileira"),
+            (1002, "Pedro Silva", 84999999999, "brasileiro"),
+            (1003, "Livia Maria", 91999999999, "brasileira"),
+            (1004, "Ana Oliveira", 21999999999, "brasileira"),
+            (1005, "Pedro Costa", 22999999999, "brasileiro"),
+            (1006, "Laura Fernandes", 33999999999, "brasileira")')
+            (1007, "Victor Correia", 54999999999, "brasileiro")')
+            (1008, "Eliane Santos", 89999999999, "brasileira")')
+            (1009, "Giovana Lacerda", 75999999999, "brasileira")
+        ''')
+
+cursor.execute ('''
+        INSERT INTO usuarios (id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES
+            (1,"Marcella Amazonas", "81999999999", "Avenida Boa Viagem, 545, ap 120, Boa viagem, Recife, Pernambuco", "brasileira", "marcella@gmail.com" ),
+            (2,"Priscila Nakayama", "11999999999", "Avenida São Paulo, 234, ap 1200, Mogi das Cruzes, São Paulo", "brasileira", "priscila@gmail.com" ),
+            (3,"Pedro Silva", "84999999999", "Rua Professor Luiz, 767, Jaboatão, Recife, Pernambuco", "brasileiro", "pedro@gmail.com" ),
+            (4,"Livia Maria", "91999999999", "Rua D, 567, Minas Gerais", "brasileira", "livia@gmail.com" ),
+            (5,"Ana Oliveira", "21999999999", "Rua das Graças, 301, Recife, Pernambuco", "brasileira", "ana@gmail.com" ),
+            (6,"Pedro Costa", "22999999999", "Travessa F, 123, Salvador, Bahia", "brasileiro", "pedro@gmail.com" ),
+            (7,"Laura Fernandes", "33999999999", "Rua das Flores, 5678, Florianópolis, Santa Catarina", "brasileira", "laura@gmail.com" ),
+            (8,"Victor Correia", "54999999999", "Rua Guiliano Professor, 9087, ap 2300, João Pessoa,Paraiba", "brasileiro", "victor@gmail.com" ),
+            (9,"Eliane Santos", "89999999999", "Avenida dos Ventos, 456, Vista Bela, Piauí", "brasileira", "eliane@gmail.com" ),
+            (10,"Giovana Lacerda", "75999999999", "Rua das Borboletas, 123, Jardim Primavera, Alagoas", "brasileira", "giovana@gmail.com" )
+             ''')
+  
+        
+# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES ')
+# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES ')
+# cursor.execute('INSERT INTO usuario(id_usuario, nome, telefone ,endereco, nacionalidade, email) VALUES 
 # # Inserção de Dados na tabela livro:
 # cursor.execute('INSERT INTO livro(id_livro, titulo, editora, autor, genero) VALUES (1 ,"Aventuras na Floresta", "Editora ABC", "Carlos Silva", "Aventura" )')
 # cursor.execute('INSERT INTO livro(id_livro, titulo, editora, autor, genero) VALUES (2 ,"O Mistério do Castelo", "Editora 123", "Ana Oliveira", "Mistério" )')
@@ -40,12 +101,9 @@ cursor = conexao.cursor()
 # cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (2, 2, "Priscila Nakayama", 11999999999, "brasileira")')
 # cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (3, 3, "Pedro Silva", 84999999999, "brasileiro")')
 # cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (4, 4, "Livia Maria", 91999999999, "brasileira")')
-# cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (5, 5, "Ana Oliveira", 21999999999, "brasileira")')
+# cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES ')
 # cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (6, 6, "Pedro Costa", 22999999999, "brasileiro")')
-# cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (7, 7, "Laura Fernandes", 33999999999, "brasileira")')
-# cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (8, 8, "Victor Correia", 54999999999, "brasileiro")')
-# cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (9, 9, "Eliane Santos", 89999999999, "brasileira")')
-# cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES (10, 10, "Giovana Lacerda", 75999999999, "brasileira")')
+# cursor.execute('INSERT INTO biblioteca(id_usuario, id_livro, nome, telefone, nacionalidade) VALUES ')
 
 # # Inserção de Dados na tabela exemplares:
 # cursor.execute('INSERT INTO exemplares(id_usuario, id_livro, data_emprestimo, data_devolucao, limite_renovacao, estado_exemplar) VALUES (1, 1, "2024-02-06", "2024-03-06", 3, "Emprestado")')
