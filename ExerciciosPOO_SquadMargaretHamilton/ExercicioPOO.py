@@ -99,7 +99,47 @@ for biblioteca in Biblioteca:
         nacionalidade=biblioteca[3],
     )
 
-
+livros = biblioteca_db.livros 
+for livro in livros:
+    obj_bibliotecas = obj_bibliotecas[livro[7]]
+    
+    usuario = None
+    if livro [6]:
+        usuario = obj_bibliotecas.usuarios[livro[6]]
+    
+    obj_bibliotecas.registrar_livro(
+        livro_id=livro[0],
+        titulo=livro[1],
+        editora=livro[2],
+        generos=livro[3],
+        autor=livro[4],
+        usuario = usuario
+    )
+    
+    for biblioteca in obj_bibliotecas.values():
+        print (
+            f" Biblioteca {biblioteca.nome}"
+        )
+        
+        #Exibicao de emprestimo
+        for emprestimo in biblioteca.emprestimo:
+            print (
+                f" Emprestimo do livro {emprestimo.livro.titulo} para o usuário {emprestimo.usuario.nome}"
+            )
+        #Exibicao para mostrar detalhes dos livros
+        for id_livro , livro in biblioteca.livros.items():
+            print (
+                f" Livro: {livro.titulo}, Editora: {livro.editora}, Genero: {livro.generos},Autor: {livro.autor}"
+            )
+        #Mostrar disponibilidade
+        for emprestimo in biblioteca.emprestimo:
+            if emprestimo ['livro'].status == "Disponivel":
+                print(f"livro: {livro.titulo}, Editora: {livro.editora}, Genero: {livro.generos},Autor: {livro.autor}")
+            else:
+                print("Livro indisponivel")
+        
+        
+                
         
 
             
